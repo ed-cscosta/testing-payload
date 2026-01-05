@@ -8,5 +8,6 @@ export const Post: CollectionConfig = {
   fields: [
     { name: 'title', type: 'text', required: true },
     { name: 'body', type: 'textarea', required: true },
+    { name: 'testing', type: 'checkbox' },
   ],
 }
