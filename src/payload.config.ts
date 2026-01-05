@@ -9,7 +9,6 @@ import pretty from 'pino-pretty'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
-import initializeCrons from './crons'
 import { Post } from './collections/Posts'
 
 const filename = fileURLToPath(import.meta.url)
@@ -79,6 +78,10 @@ export default buildConfig({
   sharp,
   plugins: [],
   onInit: async () => {
-    initializeCrons()
+    // Cron jobs em desenvolvimento apenas
+    if (process.env.NODE_ENV === 'development') {
+      const { default: initializeCrons } = await import('./crons')
+      initializeCrons()
+    }
   },
 })
